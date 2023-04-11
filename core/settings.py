@@ -37,7 +37,9 @@ THIRD_PARTY_APPS = [
     'ckeditor_uploader',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    'apps.blog',
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -129,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'es'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
