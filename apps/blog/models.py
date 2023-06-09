@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Category(models.Model):
@@ -39,7 +40,7 @@ def blog_thumbnail_directory(instance, filename):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
-    thumbnail = models.ImageField(upload_to=blog_thumbnail_directory)
+    thumbnail = models.ImageField(upload_to=blog_thumbnail_directory, max_length=500)
     
     excerpt = models.CharField(max_length=255)
     description = RichTextField()
@@ -48,10 +49,23 @@ class Post(models.Model):
     published = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, blank=True, null=True)
     
+    views = models.IntegerField(default=0, blank=True)
+    
+    def get_view_count(self):
+        views = ViewCountPost.objects.filter(post=self).count()
+    
     def __str__(self):
         return self.title
     
     class Meta:
-        ordering = ('published',)
+        ordering = ('-published',)
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+        
+
+class ViewCountPost(models.Model):
+    post = models.ForeignKey(Post, related_name='blogpost_view_count', on_delete=models.CASCADE)
+    ip_address = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return f"{self.ip_address}"

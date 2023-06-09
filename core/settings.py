@@ -46,24 +46,25 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 # CKEditor
 CKEDITOR_CONFIGS = {
     'default': {
-        """
         'toolbar': 'full',
         'autoParagraph': False,
-        """
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline'],
-            [
-                'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
-                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
-            ],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
-        ],
-        'autoParagraph': False
+        # 'toolbar': 'Custom',
+        # 'toolbar_Custom': [
+        #    ['Bold', 'Italic', 'Underline'],
+        #    [
+        #        'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+        #        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+        #    ],
+        #    ['Link', 'Unlink'],
+        #    ['RemoveFormat', 'Source']
+        # ],
+        # 'autoParagraph': False
     }
 }
 CKEDITOR_UPLOAD_PATH = '/media/'
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_ALLOW_NONIMAGE_FILES = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
